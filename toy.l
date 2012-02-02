@@ -93,7 +93,11 @@ while       { printf("%s ", yytext); return (t_while); }
 "%"         { printf("mod "); return(t_mod); }
 "<"         { printf("less "); return(t_less); }
 "<="        { printf("lessequal "); return(t_lessequal); }
-
+">"         { printf("greater "); return (t_greater); }
+">="        { printf("greaterequal "); return(t_greaterequal); }
+"=="        { printf("equal "); return (t_equal); }
+"!="        { printf("notequal "); return (t_notequal); }
+"="         { printf("assignop "); return (t_assignop); }
 ","         { printf("comma "); return(t_comma); }
 ";"         { printf("semicolon "); return(t_semicolon); }
 
