@@ -12,7 +12,7 @@
 
   int yylval;
 
-  // Toy language specific
+  // Tokens for Toy language
   #define t_bool            1000
   #define t_break           1001
   #define t_class           1002
@@ -57,15 +57,18 @@
   #define t_doubleconstant  1041
   #define t_stringconstant  1042
   #define t_id              1043
+  #define t_dot             1044
 %}
 
 letter  [a-zA-Z]
 digit   [0-9]
 id      {letter}({letter}|{digit})*
 number  {digit}+
-ws      [\t\n]
-
+newline [\n]
+ws      [ \t]+
 %%
+
+"\\"([^"\\n]|\\\\["\\n])*\\""   { printf("stringconstant "); return(t_stringconstant); }
 
 bool        { printf("%s ", yytext); return (t_bool); } 
 break       { printf("%s ", yytext); return (t_break); }
@@ -86,21 +89,36 @@ string      { printf("%s ", yytext); return (t_string); }
 void        { printf("%s ", yytext); return (t_void); } 
 while       { printf("%s ", yytext); return (t_while); }
 
+true        { printf("boolconstant "); return (t_boolconstant); } 
+false       { printf("boolconstant "); return (t_boolconstant); }
+
+"//".*                   ; /* line comment, do nothing */ 
+ "/*"([^\*]|\*[^/])*"*/" ; /* multiline comment, do nothing */
+
 "+"         { printf("plus "); return(t_plus); }
 "-"         { printf("minus "); return(t_minus); }
 "*"         { printf("multiplication "); return(t_multiplication); }
 "/"         { printf("division "); return(t_division); }
-"%"         { printf("mod "); return(t_mod); }
-"<"         { printf("less "); return(t_less); }
 "<="        { printf("lessequal "); return(t_lessequal); }
 ">"         { printf("greater "); return (t_greater); }
 ">="        { printf("greaterequal "); return(t_greaterequal); }
 "=="        { printf("equal "); return (t_equal); }
 "!="        { printf("notequal "); return (t_notequal); }
 "="         { printf("assignop "); return (t_assignop); }
-","         { printf("comma "); return(t_comma); }
 ";"         { printf("semicolon "); return(t_semicolon); }
+","         { printf("comma "); return(t_comma); }
+"."         { printf("dot "); return(t_dot); }
+"("         { printf("leftparen "); return(t_leftparen); }
+")"         { printf("rightparen "); return(t_rightparen); }
+"["         { printf("leftbracket "); return(t_leftbracket); }
+"]"         { printf("rightbracket "); return(t_rightbracket); }
+"{"         { printf("leftbrace "); return(t_leftbrace); }
+"}"         { printf("rightbrace "); return(t_rightbrace); }
 
+{ws}             { /* ignore whitespace */ }
+{newline}        { printf("\n"); }
+{number}         { printf("intconstant "); return(t_intconstant); }
+{id}             { printf("id "); return(t_id); }
 
 %%
 
