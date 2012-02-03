@@ -19,19 +19,21 @@ Toy Language Specifications:
     bool break class double else extends for if implements int  
     interface newarray println readln return string void while
 
-2. An identifier is a sequence of letters, digits, and underscores, starting with a letter.
+2. An identifier is a sequence of letters, digits, and underscores,
+    starting with a letter.
    Toy is case-sensitive, e.g., if is a keyword, but IF is an identifier;
    hello and Hello are two distinct identifiers.
 
-3. White space consists of blanks, newlines, and tabs.  White space serves to separate tokens, but is otherwise is ignored. 
+3. White space consists of blanks, newlines, and tabs. 
+   White space serves to separate tokens, but is otherwise is ignored. 
    Keywords and identifiers must be separated by white space or a token that
     is neither a keyword nor an identifier.
    For instance, ifintvoid is a single identifier, not three keywords;
     while if(23void scans as four tokens.
 
-4. An integer constant can either be specified in decimal (base 10) or hexadecimal (base 16).
+4. An integer constant can either be specified in decimal (base 10) or hexadecimal
    A decimal integer is a sequence of decimal digits (0-9).
-   A hexadecimal integer must begin with 0X or 0x (that is a zero, not the letter oh), 
+   A hexadecimal integer must begin with 0X or 0x
     and is followed by a sequence of hexadecimal digits. 
    Hexadecimal digits include the decimal digits and the letters a through f
     (either upper or lowercase).
@@ -45,7 +47,8 @@ Toy Language Specifications:
    
    For a double in this sort of scientific notation, the decimal point is required,
     the sign of the exponent is optional (if not specified, + is assumed), 
-    and the E can be lower or upper case. As above, .12E+2 is invalid, but 12.E+2 is valid.
+    and the E can be lower or upper case.
+    As above, .12E+2 is invalid, but 12.E+2 is valid.
    Leading zeroes on the mantissa and exponent are allowed.
 
 6. A string constant is a sequence of characters enclosed in double quotes.
@@ -62,6 +65,7 @@ Toy Language Specifications:
   
 9. A single-line comment is started by // and extends to the end of the line.  
    Multi-line comments start with /* and end with the first subsequent */.  
-   Any symbol is allowed in comment except the sequence */ which ends current comment.
+   Any symbol is allowed in comment except the sequence */
+    which ends current comment.
    Multi-line comments do not nest.
 
