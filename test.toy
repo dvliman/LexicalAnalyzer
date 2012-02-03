@@ -1,1 +1,3 @@
-hello "hello world" something
+s = "hello world";
+
+println("factorial of 10", fact(10), "from recursive function");

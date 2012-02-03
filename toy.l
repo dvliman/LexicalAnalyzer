@@ -62,11 +62,11 @@
 
 letter  [a-zA-Z]
 digit   [0-9]
-id      {letter}({letter}|{digit})*
-number  {digit}+
 newline [\n]
 ws      [ \t]+
 literal \"((\\.)|[^\n\\"])*\"
+exponent ((E|e)("+"|"-")?({digit}+))}
+string \"[^"\n]*\"
 %%
 
 
@@ -115,14 +115,13 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 "}"         { printf("rightbrace "); return(t_rightbrace); }
 
 {newline}        { printf("\n"); }
-{number}         { printf("intconstant "); return(t_intconstant); }
+{digit}+         { printf("intconstant "); return(t_intconstant); }
 
 
-\"((\\.)|[^\n\\"])*\"        { printf("stringconstant "); return(t_stringconstant); }
-
+{string}                        { printf("stringconstant "); return(t_stringconstant); }
 {letter}({letter}|{digit}|"_")* { printf("id "); return(t_id); }
-{ws}             { /* ignore whitespace */ }
-.                { /* ignore bad characters */ }
+{ws}                            {; /* ignore whitespace */ }
+.                               {; /* ignore bad characters */ }
 
 %%
 

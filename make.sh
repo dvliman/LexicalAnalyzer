@@ -10,4 +10,4 @@ fi
 
 lex toy.l
 cc lex.yy.c -ll
-./a.out < input.toy
+./a.out < sample.toy
