@@ -66,7 +66,12 @@ id      {letter}({letter}|{digit})*
 number  {digit}+
 newline [\n]
 ws      [ \t]+
+literal \"((\\.)|[^\n\\"])*\"
 %%
+
+
+"/*"(([^*]|(("*"+)[^*/]))*)("*"+)"/"\n {; /* multiline comment, skip it */ }
+"//"((.)*)\n                           {; /* line comment, skip it */ }
 
 bool        { printf("%s ", yytext); return (t_bool); } 
 break       { printf("%s ", yytext); return (t_break); }
@@ -87,13 +92,7 @@ string      { printf("%s ", yytext); return (t_string); }
 void        { printf("%s ", yytext); return (t_void); } 
 while       { printf("%s ", yytext); return (t_while); }
 
-true        { printf("boolconstant "); return (t_boolconstant); } 
-false       { printf("boolconstant "); return (t_boolconstant); }
-
-"//".*                   ; /* line comment, do nothing */ 
- "/*"([^\*]|\*[^/])*"*/" ; /* multiline comment, do nothing */
-
-\"(\\.|[^"])*\" { printf("stringconstant "); return(t_stringconstant); }
+true|false  { printf("boolconstant "); return (t_boolconstant); } 
 
 "+"         { printf("plus "); return(t_plus); }
 "-"         { printf("minus "); return(t_minus); }
@@ -115,10 +114,14 @@ false       { printf("boolconstant "); return (t_boolconstant); }
 "{"         { printf("leftbrace "); return(t_leftbrace); }
 "}"         { printf("rightbrace "); return(t_rightbrace); }
 
-{ws}             { /* ignore whitespace */ }
 {newline}        { printf("\n"); }
 {number}         { printf("intconstant "); return(t_intconstant); }
-{id}             { printf("id "); return(t_id); }
+
+
+\"((\\.)|[^\n\\"])*\"        { printf("stringconstant "); return(t_stringconstant); }
+
+{letter}({letter}|{digit}|"_")* { printf("id "); return(t_id); }
+{ws}             { /* ignore whitespace */ }
 .                { /* ignore bad characters */ }
 
 %%
