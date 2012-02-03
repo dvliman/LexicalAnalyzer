@@ -68,8 +68,6 @@ newline [\n]
 ws      [ \t]+
 %%
 
-"\\"([^"\\n]|\\\\["\\n])*\\""   { printf("stringconstant "); return(t_stringconstant); }
-
 bool        { printf("%s ", yytext); return (t_bool); } 
 break       { printf("%s ", yytext); return (t_break); }
 class       { printf("%s ", yytext); return (t_class); } 
@@ -95,6 +93,8 @@ false       { printf("boolconstant "); return (t_boolconstant); }
 "//".*                   ; /* line comment, do nothing */ 
  "/*"([^\*]|\*[^/])*"*/" ; /* multiline comment, do nothing */
 
+\"(\\.|[^"])*\" { printf("stringconstant "); return(t_stringconstant); }
+
 "+"         { printf("plus "); return(t_plus); }
 "-"         { printf("minus "); return(t_minus); }
 "*"         { printf("multiplication "); return(t_multiplication); }
@@ -119,8 +119,11 @@ false       { printf("boolconstant "); return (t_boolconstant); }
 {newline}        { printf("\n"); }
 {number}         { printf("intconstant "); return(t_intconstant); }
 {id}             { printf("id "); return(t_id); }
+.                { /* ignore bad characters */ }
 
 %%
+
+int yywrap(void) { return (1); }
 
 int main() {
   while(yylex()) {}
