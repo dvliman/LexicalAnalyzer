@@ -59,17 +59,18 @@
   #define t_id              1043
 %}
 
-hex       [0X|0x][0-9a-fA-F]
-letter    [a-zA-Z]
-digit     [0-9]
-newline   [\n]
-ws        [ \t]+
-string    \"[^"\n]*\"
-exponent  ((E|e)("+"|"-")?({digit}+))
-float1    {digit}+"."{digit}+{exponent}?
-float2    {digit}+{exponent}
-double    ({float1}|{float2})
-
+hex         (0x|0X)[0-9A-Fa-f]*+
+letter      [a-zA-Z]
+digit       [0-9]
+newline     [\n]
+ws          [ \t]+
+string      \"[^"\n]*\"
+exponent    ((E|e)("+"|"-")?({digit}+))
+float1      {digit}+"."{digit}+{exponent}?
+float2      {digit}+{exponent}
+double      ({float1}|{float2})
+integer     {hex}|{digit}+
+identifier  {letter}({letter}|{digit}|"_")*   
 %%
 
 
@@ -116,13 +117,13 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 "{"         { printf("leftbrace "); return(t_leftbrace); }
 "}"         { printf("rightbrace "); return(t_rightbrace); }
 
-{newline}        { printf("\n"); }
-{hex}|{digit}+   { printf("intconstant "); return(t_intconstant); }
-{double}         { printf("doubleconstant "); return(t_doubleconstant); }
-{string}                        { printf("stringconstant "); return(t_stringconstant); }
-{letter}({letter}|{digit}|"_")* { printf("id "); return(t_id); }
-{ws}                            {; /* ignore whitespace */ }
-.                               {; /* ignore bad characters */ }
+{newline}       { printf("\n"); }
+{integer}       { printf("intconstant "); return(t_intconstant); }
+{double}        { printf("doubleconstant "); return(t_doubleconstant); }
+{string}        { printf("stringconstant "); return(t_stringconstant); }
+{identifier}    { printf("id "); return(t_id); }
+{ws}            {; /* ignore whitespace */ }
+.               {; /* ignore bad characters */ }
 
 %%
 
