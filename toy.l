@@ -110,6 +110,7 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 "="         { printf("assignop "); return (t_assignop); }
 ";"         { printf("semicolon "); return(t_semicolon); }
 ","         { printf("comma "); return(t_comma); }
+"."         { printf("period "); return(t_period); }
 "("         { printf("leftparen "); return(t_leftparen); }
 ")"         { printf("rightparen "); return(t_rightparen); }
 "["         { printf("leftbracket "); return(t_leftbracket); }
