@@ -5,6 +5,10 @@ Toy Language Parser:
 
 To run this program:
 ====================
+
+You need UNIX environment. In debian based system, there is a package 
+called 'flex'. In Mac OS X, lex comes pre installed. 
+
   1. With bash script
      ./make.sh (sudo chmod+x make.sh if permission needed)
 
