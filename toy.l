@@ -60,13 +60,16 @@
   #define t_dot             1044
 %}
 
-letter  [a-zA-Z]
-digit   [0-9]
-newline [\n]
-ws      [ \t]+
-literal \"((\\.)|[^\n\\"])*\"
-exponent ((E|e)("+"|"-")?({digit}+))}
-string \"[^"\n]*\"
+letter    [a-zA-Z]
+digit     [0-9]
+newline   [\n]
+ws        [ \t]+
+string    \"[^"\n]*\"
+exponent  ((E|e)("+"|"-")?({digit}+))
+float1    {digit}+"."{digit}+{exponent}?
+float2    {digit}+{exponent}
+double    ({float1}|{float2})
+
 %%
 
 
@@ -116,8 +119,7 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 
 {newline}        { printf("\n"); }
 {digit}+         { printf("intconstant "); return(t_intconstant); }
-
-
+{double}         { printf("doubleconstant "); return(t_doubleconstant); }
 {string}                        { printf("stringconstant "); return(t_stringconstant); }
 {letter}({letter}|{digit}|"_")* { printf("id "); return(t_id); }
 {ws}                            {; /* ignore whitespace */ }
