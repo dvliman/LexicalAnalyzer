@@ -57,9 +57,9 @@
   #define t_doubleconstant  1041
   #define t_stringconstant  1042
   #define t_id              1043
-  #define t_dot             1044
 %}
 
+hex       [0X|0x][0-9a-fA-F]
 letter    [a-zA-Z]
 digit     [0-9]
 newline   [\n]
@@ -109,7 +109,6 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 "="         { printf("assignop "); return (t_assignop); }
 ";"         { printf("semicolon "); return(t_semicolon); }
 ","         { printf("comma "); return(t_comma); }
-"."         { printf("dot "); return(t_dot); }
 "("         { printf("leftparen "); return(t_leftparen); }
 ")"         { printf("rightparen "); return(t_rightparen); }
 "["         { printf("leftbracket "); return(t_leftbracket); }
@@ -118,7 +117,7 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 "}"         { printf("rightbrace "); return(t_rightbrace); }
 
 {newline}        { printf("\n"); }
-{digit}+         { printf("intconstant "); return(t_intconstant); }
+{hex}|{digit}+   { printf("intconstant "); return(t_intconstant); }
 {double}         { printf("doubleconstant "); return(t_doubleconstant); }
 {string}                        { printf("stringconstant "); return(t_stringconstant); }
 {letter}({letter}|{digit}|"_")* { printf("id "); return(t_id); }
