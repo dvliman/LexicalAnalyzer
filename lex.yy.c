@@ -553,16 +553,8 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "toy.l"
 #line 2 "toy.l"
-  #define MAX_LENGTH      10
-  #define MAX             100
-
   #include <stdio.h>
   #include <string.h>
-
-  struct {
-    char name[MAX_LENGTH];
-    int type;
-  }table[MAX];
 
   int yylval;
 
@@ -611,7 +603,8 @@ char *yytext;
   #define t_doubleconstant  1041
   #define t_stringconstant  1042
   #define t_id              1043
-#line 615 "lex.yy.c"
+
+#line 608 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -793,11 +786,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 74 "toy.l"
+#line 67 "toy.l"
 
 
 
-#line 801 "lex.yy.c"
+#line 794 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -883,247 +876,247 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 77 "toy.l"
+#line 70 "toy.l"
 {; /* multiline comment, skip it */ }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 78 "toy.l"
+#line 71 "toy.l"
 {; /* line comment, skip it */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 80 "toy.l"
+#line 73 "toy.l"
 { printf("%s ", yytext); return (t_bool); } 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 81 "toy.l"
+#line 74 "toy.l"
 { printf("%s ", yytext); return (t_break); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 82 "toy.l"
+#line 75 "toy.l"
 { printf("%s ", yytext); return (t_class); } 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 83 "toy.l"
+#line 76 "toy.l"
 { printf("%s ", yytext); return (t_double); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 84 "toy.l"
+#line 77 "toy.l"
 { printf("%s ", yytext); return (t_else); } 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 85 "toy.l"
+#line 78 "toy.l"
 { printf("%s ", yytext); return (t_extends); } 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 86 "toy.l"
+#line 79 "toy.l"
 { printf("%s ", yytext); return (t_for); } 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 87 "toy.l"
+#line 80 "toy.l"
 { printf("%s ", yytext); return (t_if); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 88 "toy.l"
+#line 81 "toy.l"
 { printf("%s ", yytext); return (t_implements); } 
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 89 "toy.l"
+#line 82 "toy.l"
 { printf("%s ", yytext); return (t_int); } 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 90 "toy.l"
+#line 83 "toy.l"
 { printf("%s ", yytext); return (t_interface); } 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 91 "toy.l"
+#line 84 "toy.l"
 { printf("%s ", yytext); return (t_newarray); } 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 92 "toy.l"
+#line 85 "toy.l"
 { printf("%s ", yytext); return (t_println); } 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 93 "toy.l"
+#line 86 "toy.l"
 { printf("%s ", yytext); return (t_readln); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 94 "toy.l"
+#line 87 "toy.l"
 { printf("%s ", yytext); return (t_return); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 95 "toy.l"
+#line 88 "toy.l"
 { printf("%s ", yytext); return (t_string); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 96 "toy.l"
+#line 89 "toy.l"
 { printf("%s ", yytext); return (t_void); } 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 97 "toy.l"
+#line 90 "toy.l"
 { printf("%s ", yytext); return (t_while); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 99 "toy.l"
+#line 92 "toy.l"
 { printf("boolconstant "); return (t_boolconstant); } 
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 101 "toy.l"
+#line 94 "toy.l"
 { printf("plus "); return(t_plus); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 102 "toy.l"
+#line 95 "toy.l"
 { printf("minus "); return(t_minus); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 103 "toy.l"
+#line 96 "toy.l"
 { printf("multiplication "); return(t_multiplication); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 104 "toy.l"
+#line 97 "toy.l"
 { printf("division "); return(t_division); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 105 "toy.l"
+#line 98 "toy.l"
 { printf("lessequal "); return(t_lessequal); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 106 "toy.l"
+#line 99 "toy.l"
 { printf("greater "); return (t_greater); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 107 "toy.l"
+#line 100 "toy.l"
 { printf("greaterequal "); return(t_greaterequal); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 108 "toy.l"
+#line 101 "toy.l"
 { printf("equal "); return (t_equal); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 109 "toy.l"
+#line 102 "toy.l"
 { printf("notequal "); return (t_notequal); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 110 "toy.l"
+#line 103 "toy.l"
 { printf("assignop "); return (t_assignop); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 111 "toy.l"
+#line 104 "toy.l"
 { printf("semicolon "); return(t_semicolon); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 112 "toy.l"
+#line 105 "toy.l"
 { printf("comma "); return(t_comma); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 113 "toy.l"
+#line 106 "toy.l"
 { printf("period "); return(t_period); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 114 "toy.l"
+#line 107 "toy.l"
 { printf("leftparen "); return(t_leftparen); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 115 "toy.l"
+#line 108 "toy.l"
 { printf("rightparen "); return(t_rightparen); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 116 "toy.l"
+#line 109 "toy.l"
 { printf("leftbracket "); return(t_leftbracket); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 117 "toy.l"
+#line 110 "toy.l"
 { printf("rightbracket "); return(t_rightbracket); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 118 "toy.l"
+#line 111 "toy.l"
 { printf("leftbrace "); return(t_leftbrace); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 119 "toy.l"
+#line 112 "toy.l"
 { printf("rightbrace "); return(t_rightbrace); }
 	YY_BREAK
 case 41:
 /* rule 41 can match eol */
 YY_RULE_SETUP
-#line 121 "toy.l"
+#line 114 "toy.l"
 { printf("\n"); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 122 "toy.l"
+#line 115 "toy.l"
 { printf("intconstant "); return(t_intconstant); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 123 "toy.l"
+#line 116 "toy.l"
 { printf("doubleconstant "); return(t_doubleconstant); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 124 "toy.l"
+#line 117 "toy.l"
 { printf("stringconstant "); return(t_stringconstant); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 125 "toy.l"
+#line 118 "toy.l"
 { printf("id "); return(t_id); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 126 "toy.l"
+#line 119 "toy.l"
 {; /* ignore whitespace */ }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 127 "toy.l"
+#line 120 "toy.l"
 {; /* ignore bad characters */ }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 129 "toy.l"
+#line 122 "toy.l"
 ECHO;
 	YY_BREAK
-#line 1127 "lex.yy.c"
+#line 1120 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2120,13 +2113,13 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 129 "toy.l"
+#line 122 "toy.l"
 
 
 
 int yywrap(void) { return (1); }
 
-int main() {
+int main(int argc, char *argv[]) {
   while(yylex()) {}
 }
 

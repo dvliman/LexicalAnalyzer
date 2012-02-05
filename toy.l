@@ -1,14 +1,6 @@
 %{
-  #define MAX_LENGTH      10
-  #define MAX             100
-
   #include <stdio.h>
   #include <string.h>
-
-  struct {
-    char name[MAX_LENGTH];
-    int type;
-  }table[MAX];
 
   int yylval;
 
@@ -57,6 +49,7 @@
   #define t_doubleconstant  1041
   #define t_stringconstant  1042
   #define t_id              1043
+
 %}
 
 hex         (0x|0X)[0-9A-Fa-f]*+
@@ -130,7 +123,7 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 
 int yywrap(void) { return (1); }
 
-int main() {
+int main(int argc, char *argv[]) {
   while(yylex()) {}
 }
 
