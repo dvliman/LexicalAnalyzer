@@ -49,7 +49,17 @@
   #define t_doubleconstant  1041
   #define t_stringconstant  1042
   #define t_id              1043
-
+  
+  #define MAX 500
+  
+  struct {
+    int dispatch[52];
+    char symbol[MAX];
+    char next[MAX];
+  } symbol_table;
+  
+  void init_symbol_table(void);
+  int next_symbol(char *);  
 %}
 
 hex         (0x|0X)[0-9A-Fa-f]*+
@@ -123,7 +133,62 @@ true|false  { printf("boolconstant "); return (t_boolconstant); }
 
 int yywrap(void) { return (1); }
 
+
+
 int main(int argc, char *argv[]) {
-  while(yylex()) {}
+
+  init_symbol_table();
+  //while(yylex()) {}
+  create("bool");
+  return 0;
 }
 
+/* initialize the symbol table */
+void init_symbol_table(void) {
+  int i;
+  for (i = 0; i < 52; i++)
+    symbol_table.dispatch[i] = 0;
+  for (i = 0; i < MAX; i++)
+    symbol_table.symbol[i] = '\0';
+  for (i = 0; i < MAX; i++)
+    symbol_table.next[i] = -1;
+}
+
+/* A B C ... Z  a b c ... z
+   0 1 2     25 26 ...... 51 */
+int next_symbol (char *s) {
+  int p = s[0];
+  if (p >= 97) return p - 97 + 26; 
+  return p - 65;
+}
+
+void create (char *s) {
+  int value = next_symbol(s); 
+  int ptr = symbol_table.dispatch[ value ];
+ 
+    printf ("%d\n", ptr);
+  
+  int *p = s;
+  if (ptr == 0) {
+    printf("%s\n","i am here");
+   
+    int array[7] = { 1, 2, 3, 4, 5, 6, 0 };
+    int empty = find_first_empty(array);
+    printf ("%d\n", empty);
+
+  } else {
+
+  }
+}
+
+int find_first_empty(int array[]) {
+  int length = sizeof(array) / sizeof(int);
+  int count; 
+
+  for (count = 0; count < length; count++) {
+    printf("%s\n", length);
+    
+    if (array[count] == 0) 
+      return count;
+  }
+}
