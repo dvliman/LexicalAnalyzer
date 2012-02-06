@@ -1,4 +1,19 @@
 if(23void
 0X89aB
 0x12cc
-.12E+2 
+12E+2 
+99
+{}
+{ something } /* line comment */
+// bla bla (class)
+(class); int x = j;
+
+class Parser {
+  public static void main(String [] args) {
+    int next = array[i] + l;
+    for (int j = 0;  j < max; j++)
+      array[j] = array[h] + 1;
+    return 0;
+  }
+}
+

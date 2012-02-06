@@ -29,6 +29,14 @@ To run the tests:
     cc trie_test.c
     ./a.out
     
+Test Cases Designs: 
+===================
+1. output.txt  => output of sample input from project specification 
+2. output_parser_test.txt => output of my own test cases
+3. trie_test_output.txt => output of my TRIE test cases
+4. sample.toy             => test given in the project
+5. test.toy               => my own parser test
+
 Implementation: 
 ===============
 This parser returns tokens in integer format, which will be used for yacc.

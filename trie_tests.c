@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 200
+#define MAX 150
 #define LENGTH(x) (sizeof(x)/sizeof(*(x)))
 #define true 1 
 #define false 0
@@ -27,11 +27,24 @@ int main(int argc, char *argv[]) {
   printf("Inserting bool...\n");
   insert("bool");
   
-  printf("Inserting break...\n");
+  printf("Inserting boolean...\n");
   insert("boolean");
   
-  insert("break");
+  printf("Inserting class...\n");
+  insert("class");
+  
+  printf("Inserting extends...\n");
+  insert("extends");
  
+  printf("Inserting implements...\n");
+  insert("implements");
+  
+  printf("Inserting a...\n");
+  insert("a");
+  
+  printf("Inserting abba...\n");
+  insert("abba");
+  
   printf("\nSwitch Table\n============\n");
   print_switch(symbol_table.dispatch, LENGTH(symbol_table.dispatch));
    

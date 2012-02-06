@@ -50,7 +50,7 @@
   #define t_stringconstant  1042
   #define t_id              1043
   
-  #define MAX 200
+  #define MAX 150
   #define LENGTH(x) (sizeof(x)/sizeof(*(x)))
   #define true 1 
   #define false 0
