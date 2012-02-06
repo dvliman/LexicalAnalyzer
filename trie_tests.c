@@ -30,15 +30,16 @@ int main(int argc, char *argv[]) {
   printf("Inserting break...\n");
   insert("boolean");
   
-  
-  printf("Switch Table\n============\n");
-  print_iarray(symbol_table.dispatch, LENGTH(symbol_table.dispatch));
+  insert("break");
+ 
+  printf("\nSwitch Table\n============\n");
+  print_switch(symbol_table.dispatch, LENGTH(symbol_table.dispatch));
    
   printf("\nSymbol Table\n============\n");
-  print_carray(symbol_table.symbol, LENGTH(symbol_table.symbol));
+  print_symbol(symbol_table.symbol, LENGTH(symbol_table.symbol));
   
   printf("\nNext Table\n==========\n");
-  print_iarray(symbol_table.next, LENGTH(symbol_table.next));
+  print_next(symbol_table.next, LENGTH(symbol_table.next));
   
   printf("\n");
   return 0;
