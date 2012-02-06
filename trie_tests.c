@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 500
+#define MAX 200
 #define LENGTH(x) (sizeof(x)/sizeof(*(x)))
 #define true 1 
 #define false 0
@@ -14,25 +14,22 @@ struct {
 
 void init_symbol_table(void);
 int next_symbol(char *);
-int find_first_empty(char *, int);  
-void print_carray(char *, int);  
-void print_iarray(int *, int);  
+int find_first_empty(char *, int);
+void print_switch(int *, int);    
+void print_symbol(char *, int);  
+void print_next(int *, int);  
 void insert(char *);
 
 int main(int argc, char *argv[]) {
 
   init_symbol_table();
-  printf("Tokens Output\n=============\n");
-  //while(yylex()) {}
-
+ 
+  printf("Inserting bool...\n");
+  insert("bool");
   
+  printf("Inserting break...\n");
   insert("boolean");
-  insert("break");
-  insert("extends");
-  insert("a");
-  insert("b");
-  insert("A");
-  insert("Babi");
+  
   
   printf("Switch Table\n============\n");
   print_iarray(symbol_table.dispatch, LENGTH(symbol_table.dispatch));
@@ -137,16 +134,41 @@ int find_first_empty(char *array, int size) {
       return i;
 }
 
-/* Print chars array */
-void print_carray(char *table, int size) {
-  int i; 
+/* Print switch array */
+void print_switch(int *table, int size) {
+  char alphabets[52] = { 'A', 'B', 'C', 'D', 'E', 'F','G','H',
+                         'I','J','K','L','M','N','O','P','Q',
+                         'R','S','T','U','V','W','X','Y','Z', 
+                         'a','b','c','d','e','f','g','h',
+                         'i','j','k','l','m','n','o','p','q',
+                         'r','s','t','u','v','w','x','y','z'};
+  int i;
+  printf(" ");
+  for (i = 0; i < 52; i++)
+    printf("%1c  ", alphabets[i]);
+  printf("\n"); 
   for (i = 0; i < size; i++) 
-    printf("%c ", table[i]);
+    printf("%1d ", table[i]);
 }
 
-/* Print ints array */
-void print_iarray(int *table, int size) {
+/* Print symbol array */
+void print_symbol(char *table, int size) {
   int i; 
+ 
   for (i = 0; i < size; i++) 
-    printf("%d ", table[i]);
+    printf("%1d ", i); 
+  printf("\n");
+  for (i = 0; i < size; i++) 
+    printf("%1c ", table[i]);
+}
+
+/* Print next array*/
+void print_next(int *table, int size) {
+  int i; 
+   printf("Array Indices\n");
+  for (i = 0; i < size; i++) 
+    printf("%1d ", i);
+  printf("\nContent:\n");
+  for (i = 0; i < size; i++)
+    printf("%1d ", table[i]);
 }

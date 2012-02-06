@@ -15,7 +15,26 @@ called 'flex'. In Mac OS X, lex comes pre installed.
   2. Without bash script
      lex toy.l 
      cc lex.yy.c -ll 
-     ./a.out < input.toy
+     ./a.out < sample.toy
+
+To run the tests:
+=================
+1. Testing the parser
+    lex toy.l
+    cc lex.yy.c -ll
+    ./a.out < sample.toy (sample.toy is given in the project spec)
+    ./a.out < test.toy   (my own test cases)
+    
+2. Testing the trie
+    cc trie_test.c
+    ./a.out
+    
+Implementation: 
+===============
+This parser returns tokens in integer format, which will be used for yacc.
+Tokens are stored in a symbol table. The symbol table is implemented with trie.
+Trie is a space and time efficient data structure. My trie uses 3 arrays to
+keep track of same prefixes. Trie is more commonly implemented with tree.
 
 Toy Language Specifications:
 ============================
