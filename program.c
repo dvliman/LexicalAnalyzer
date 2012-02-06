@@ -9,13 +9,14 @@
 struct {
   int dispatch[52];
   char symbol[MAX];
-  char next[MAX];
+  int next[MAX];
 } symbol_table;
 
 void init_symbol_table(void);
 int next_symbol(char *);
 int find_first_empty(char *, int);  
-void print_table(char *, int);  
+void print_carray(char *, int);  
+void print_iarray(int *, int);  
 void insert(char *);
 
 int main(int argc, char *argv[]) {
@@ -23,19 +24,30 @@ int main(int argc, char *argv[]) {
   init_symbol_table();
   printf("Tokens Output\n=============\n");
   //while(yylex()) {}
-  symbol_table.dispatch[27] = 0;
-  symbol_table.symbol[0] = 'o';
-  symbol_table.symbol[1] = 'o';
-  symbol_table.symbol[2] = 'l';
-  symbol_table.symbol[3] = '@';
+
   
-  printf("Symbol Table\n============\n");
-  insert("boolean")
-  print_table(symbol_table.symbol, LENGTH(symbol_table.symbol));
+  insert("boolean");
+  insert("break");
+  insert("extends");
+  insert("a");
+  insert("b");
+  insert("A");
+  insert("Babi");
+  
+  printf("Switch Table\n============\n");
+  print_iarray(symbol_table.dispatch, LENGTH(symbol_table.dispatch));
+   
+  printf("\nSymbol Table\n============\n");
+  print_carray(symbol_table.symbol, LENGTH(symbol_table.symbol));
+  
+  printf("\nNext Table\n==========\n");
+  print_iarray(symbol_table.next, LENGTH(symbol_table.next));
+  
+  printf("\n");
   return 0;
 }
 
-/* initialize the symbol table */
+/* Initialize the symbol table */
 void init_symbol_table(void) {
   int i;
   for (i = 0; i < 52; i++)
@@ -62,14 +74,13 @@ void insert (char *s) {
   int value = next_symbol(s); 
   int ptr = symbol_table.dispatch[ value ];
   
-  // pointer is the first same prefix previously stored in the symbol table
+  // pointer is the first prefix string[0] previously stored in the symbol table
   // if pointer is undefined, create.
   if (ptr == -1) {
     
     // find the location of prefix in dispatch table
     int slot = find_first_empty(symbol_table.symbol, LENGTH(symbol_table.symbol));
     symbol_table.dispatch[value] = slot;    // update the pointer
-    int next_slot = slot;                   // to be used for next table
     
     // store the rest of characters to symbol table
     int i = 1;
@@ -78,11 +89,11 @@ void insert (char *s) {
     symbol_table.symbol[slot] = '@';
 
   } else { 
-    // pointer is defined, there are same prefixes. First char is checked
+  // pointer is defined, there are same prefixes. First char is skipped
     int exit = false;
 
     // keep traversing as long as prefix is same
-    int i = 1;      // second character of input string
+    int i = 1;      // start with second character of input string
     int p = ptr;    // start index of same prefix in the symbol table
     while (i < strlen(s)) {
       if (s[i] == symbol_table.symbol[p]) {
@@ -94,30 +105,23 @@ void insert (char *s) {
       }
     }
     
-    // the Rest of character start to differ:
+    // The Rest of character start to differ:
     //  1. either reached end marker
     //  2. or the character is different.
-    // Use the next table to jump to the right position to store data.
     if (exit == true) {
+      // use the next table to jump to the right position to store data.
+      int next;
+      if (symbol_table.next[p] == -1)
+        next = find_first_empty(symbol_table.symbol, LENGTH(symbol_table.symbol));
+      else
+        next = symbol_table.next[p];
+          
+      // update the next table
+      symbol_table.next[p] = next;
       
-      if (symbol_table.symbol[p] == '@') {
-        int next; 
-        if (symbol_table.next[p] != -1) {
-          
-        } else 
-          next = find_first_empty(symbol_table.symbol, LENGTH(symbol_table.symbol));
-          
-          
-          
-      } else {
-        // there is inconsistency in the prefixes 
-        int next = find_first_empty(symbol_table.symbol, LENGTH(symbol_table.symbol));
-        symbol_table.next[p] = next;
-        
-        while (i < strlen(s)) 
-          symbol_table.symbol[next++] = s[i++];
-        symbol_table.symbol[next] = '@';    
-      }
+      while (i < strlen(s)) 
+        symbol_table.symbol[next++] = s[i++];
+      symbol_table.symbol[next] = '@';
     }
   
     // If exit stays false until here, the input string is accepted. 
@@ -125,6 +129,7 @@ void insert (char *s) {
   }
 }
 
+/* Find the first empty slot in the symbol table */
 int find_first_empty(char *array, int size) {
   int i; 
   for (i = 0; i < size; i++) 
@@ -132,8 +137,16 @@ int find_first_empty(char *array, int size) {
       return i;
 }
 
-void print_table(char *table, int size) {
+/* Print chars array */
+void print_carray(char *table, int size) {
   int i; 
   for (i = 0; i < size; i++) 
     printf("%c ", table[i]);
+}
+
+/* Print ints array */
+void print_iarray(int *table, int size) {
+  int i; 
+  for (i = 0; i < size; i++) 
+    printf("%d ", table[i]);
 }
